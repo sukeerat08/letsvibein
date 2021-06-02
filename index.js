@@ -13,18 +13,20 @@ const passportGoogle=require('./config/google-passport-oauth2');
 
 const cors=require('cors');
 app.use(cors());
-const chatServer = require("http").Server(app);
 
-//setting up configuation for setting sockets on the chat server
-const chatSockets = require("./config/chat_socket").chatSockets(chatServer);
+// const chatServer = require("http").Server(app);
 
-chatServer.listen(process.env.PORT, function (error) {
-  if (error) {
-    console.log("Error in setting up Chat Server");
-  } else {
-    console.log("Chat Server is listening on port");
-  }
-});
+// //setting up configuation for setting sockets on the chat server
+// const chatSockets = require("./config/chat_socket").chatSockets(chatServer);
+    
+
+// chatServer.listen(process.env.PORT, function (error) {
+//   if (error) {
+//     console.log("Error in setting up Chat Server");
+//   } else {
+//     console.log("Chat Server is listening on port");
+//   }
+// });
 
 
 const db=require('./config/mongoose');
@@ -87,11 +89,14 @@ app.use(customWare.setFlash);
 //use express routers
 app.use('/',require('./routes'));
 
+const server = app.listen(process.env.PORT||8080,()=>{console.log("Server successfully has Started!")});
+require("./config/chat_socket").chatSockets(server); 
 
-app.listen(process.env.PORT||8000,function(err){
-     if(err){
-        console.log(`Error in running server:${err}`);
-        return;
-    }
-    console.log(`Server is running on port`);
-});
+
+// app.listen(process.env.PORT||8000,function(err){
+//      if(err){
+//         console.log(`Error in running server:${err}`);
+//         return;
+//     }
+//     console.log(`Server is running on port`);
+// });

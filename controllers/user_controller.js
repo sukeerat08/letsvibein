@@ -81,7 +81,7 @@ module.exports.inbox=async function(req,res){
             }
         });
          
-        console.log("Inbox user is",user);
+        // console.log("Inbox user is",user);
         
         return res.render('inbox',{
             title:"User Inbox",
