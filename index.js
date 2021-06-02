@@ -19,7 +19,7 @@ const chatServer = require("http").Server(app);
 //setting up configuation for setting sockets on the chat server
 const chatSockets = require("./config/chat_socket").chatSockets(chatServer);
 
-chatServer.listen(5000, function (error) {
+chatServer.listen(process.env.PORT, function (error) {
   if (error) {
     console.log("Error in setting up Chat Server");
   } else {
