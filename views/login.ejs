@@ -1,0 +1,107 @@
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/login.css" >
+    <title><%=title%></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="/user/create-session" method="POST" autocomplete="off" class="sign-in-form">
+            <h2 class="title">Sign in to Vibe</h2>
+            <div class="input-field">
+              <input type="email" name="email" placeholder="Enter Your Email" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            </div>
+            <div class="input-field">
+              <input type="password" name="password" placeholder="Enter Password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+            </div>
+            <a href="/password">Forgot your password?</a>
+            <input type="submit"  class="btn solid" />
+            <p class="social-text">Or Sign in with google</p>
+            <div class="social-media">
+              <a href="/user/auth/google" class="social-icon"><i class="fab fa-google-plus-g"></i></a>
+            </div>
+          </form>
+         
+          <form action="/user/create-user" method="POST" autocomplete="off" class="sign-up-form">
+            <h2 class="title">Create Account</h2>
+            <div class="input-field">
+              <input type="text" name="name"  placeholder="Your Name" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"/>
+            </div>
+            <div class="input-field">
+              <input type="email" name="email" placeholder="Enter Your Email" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"/>
+            </div>
+            <div class="input-field">
+              <input type="password" name="password" placeholder="Enter Password" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"/>
+            </div>
+            <div class="input-field">
+              <input type="password" name="confirm_password" placeholder="Confirm Password" required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');"/>
+            </div>
+            <input type="submit" class="btn" />
+            <p class="social-text">Or Sign up with social platforms</p>
+            <div class="social-media">
+              <a href="/user/auth/google" class="social-icon"><i class="fab fa-google-plus-g"></i></a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>Hello Freind!! New Here?</h3>
+            <p>
+              Enter your personal details and lets begin
+            </p>
+            <button class="btn transparent" id="sign-up-btn">
+              Sign up
+            </button>
+          </div>
+        </div>
+        <div class="panel right-panel">
+          <div class="content" style="margin-top:-10rem">
+            <h3>Welcome Back To Vibe</h3>
+            <p>
+             To keep connected with us please enter your login details
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              Sign in
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+
+    <script>
+      <%if(flash.success && flash.success.length>0){%>
+          new Noty({
+            type:"warning",
+            theme:'mint',
+            text:'<%=flash.success%>',
+            layout:'topRight',
+            timeout:1500
+          }).show();
+      <%}%>
+
+      <%if(flash.error && flash.error.length>0){%>
+          new Noty({
+            type:"error",
+            theme: 'metroui',
+            text:'<%=flash.error%>',
+            layout:'topRight',
+            timeout:1500
+          }).show();
+      <%}%>
+    </script>
+  </body>

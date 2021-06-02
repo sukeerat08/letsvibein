@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/css/search.css">
+<%-include("_header.ejs")-%>
+
+<body>
+    <div id="lower-div">
+        <div id="upper-div">
+            <h1>Search Results</h1>
+
+            <div id="results">
+                <%if(result.length==0){%>
+                    <p>No such user found!</p>
+                <%}%>
+
+                <%for(user of result){%>
+
+                    <a href="/user/profile/<%=user.id%>">
+                        <img src="<%=user.avatar%>">
+                        <p><%=user.name%></p>
+                    </a>
+    
+                <%}%>
+            </div>
+           
+        </div>
+    </div>
+</body>

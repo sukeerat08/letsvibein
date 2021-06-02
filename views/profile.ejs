@@ -1,0 +1,165 @@
+<%-include("_header.ejs")-%>
+<link rel="stylesheet" href="/css/profile.css">
+
+<body>
+
+    <!--finding if the opened profile is in our pending list or not-->
+    <% let found=false%>
+    <% for(pending of logged_user.friend_pending){ %>
+        <% if(pending.to_user.id==profile_user.id){%>
+            <% found=true%>
+            <%break%>
+        <%}%>
+    <%}%>
+
+    <!--counting no. of posts of user-->
+    <% var numposts=0%>
+    <%for(post of posts){%>
+        <%if(post.user.name==profile_user.name){%>
+            <%numposts=numposts+1%>
+        <%}%>
+    <%}%>
+
+    <!--Chatname is the chatroom we have to join-->
+    <% var chatname=null%>
+
+    <% let isFriend = false %>
+
+    <!--We are getting the name of chatbox which is common to profile user and signed in user-->
+    <% for(chatroom of profile_user.chatroom){ %>
+        <% let found=false%>
+
+        <% for(chatbox of locals.user.chatroom){ %>
+          <% if(chatbox._id.equals(chatroom._id)){%>
+            <%chatname=chatroom.name%>
+            <% found=true%>
+            <%break%>
+          <% } %>
+        <% } %>
+
+        <% if(found==true){%>
+            <%break%>
+        <% } %>
+
+    <% } %>
+    <div id="lower-div">
+        <div id=upper-div>
+           <h1><%=profile_user.name%></h1>
+
+           <div id="profile-info">
+
+              <div id="img-info">
+                <img src="<%=profile_user.avatar%>" width="100px" height="100px" style="border-radius: 50%; margin-top: 5px;">
+                <h6 style="margin-top: -1px; font-weight: 600;text-align: center;"><%=profile_user.name%></h6>
+                <p style="margin-top:-8px; font-size: 15px;"><%=profile_user.about%></p>
+              </div>
+
+              <div id="info-box">
+                <div id="friend-post-info">
+                    <div id="post-info">
+                     <h6 style="font-weight: 600;"><%=numposts%></h6>
+                     <h6 style="font-weight: 600;">Posts</h6>
+                    </div>
+                    <div id="friend-info">
+                     <h6 style="font-weight: 600;"><%=profile_user.friends.length%></h6>
+                     <h6 style="font-weight: 600;">Friends</h6>
+                    </div>
+                </div>
+
+                <!--if logged in user is same as profile user then display update and friendlist buttons-->
+                <%if(locals.user.id==profile_user.id){%>
+                    <div style="display: flex; justify-content:space-evenly; flex-wrap: wrap;">
+                        <div id="profile-button">
+                            <a href="/user/profileUpdate/<%=profile_user.id%>"><button>Update</button></a>
+                        </div>
+                        <div id="profile-button">
+                            <a href="/friend/showlist/?id=<%=profile_user.id%>"><button>Friends</button></a>
+                        </div>
+                    </div>
+                <%}%>
+
+                 <!--if logged in user is not same profile user then display friend unfreind buttons-->
+                <% if( locals.user.id!= profile_user.id){ %>
+
+                    <% for(friends of profile_user.friends){ %> 
+                    <% if((locals.user.id == friends.from_user.id || friends.to_user.id ==locals.user.id) && user.id!= profile_user.id){ %>
+                      <% isFriend = true %>
+                      
+                    <% } %>
+                    <%}%>
+
+                    <% if(isFriend){%>
+
+                        <div style="display: flex; justify-content:space-evenly;">
+                            <div id="profile-button">
+                                <a href="/friend/remove-friend/?id=<%=profile_user.id %>/<%=chatname%>"><button>UnFreind</button></a>
+                            </div>
+
+                            <div id="profile-button">
+                                <a href="/friend/chatbox/?name=<%=profile_user.id%>/<%=chatname%>"><button>Message</button></a>
+                            </div>
+                        </div>
+
+                    <%}else{%>
+
+                        <%if(found==true){%>
+                            <div id="profile-button">
+                                <button>Pending</button>
+                            </div>
+                        <%}else{%>
+                            <div id="profile-button">
+                                <a href="/friend/request-friend/?id=<%=profile_user.id %>"><button>Send Request</button></a>
+                            </div>
+                        <%}%>
+
+                    <%}%>
+
+                <%}%>
+                  
+            </div>
+           </div>
+
+           <% if(isFriend || locals.user.id==profile_user.id){%>
+                <div class="post-container">
+                    <ul>
+                    
+                    <%for(post of posts){%>
+                        <%if(post.user.email==profile_user.email){%>
+                            <%-include('_post')-%>
+                        <%}%>
+                    <%}%>
+                    
+                    </ul>
+                </div>
+           <%}else{%>
+                <div id="private">
+                    <i class="material-icons large"> enhanced_encryption</i>
+                   
+                    <p>This account is private.</p>
+                    <p>To see their pictures and videos follow them</p>
+                </div>
+            <%}%>
+          
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="/js/post_preview.js"></script>
+    <script src="/js/home_post_comment.js"></script>
+    <script src="/js/home_post.js"></script>
+
+
+    <!--  import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+    <script src="/js/toggle_likes.js"></script>
+    <script>
+      //adding toggleLike class to every toggle button present
+        $('.toggle-like-button').each(function(){
+            let self = this;
+            let toggleLike = new ToggleLike(self);
+        });
+    </script>
+
+</body>

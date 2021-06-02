@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/verifyEmail.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+<body>
+        <div id="upper-box">
+
+            <form action="/password/verify-email" method="POST">
+                <h3>Verify Your Account</h3>
+                <input type="email" name='email' placeholder="Email" required autocomplete="off" required>
+                <button class="btn waves-effect waves-light" type="submit">
+                    <i class="material-icons right">send</i>
+                    Send Mail
+                </button>
+            </form>
+
+        </div>
+
+        <script>
+            <%if(flash.success && flash.success.length>0){%>
+                new Noty({
+                  type:"warning",
+                  theme:'mint',
+                  text:'<%=flash.success%>',
+                  layout:'topRight',
+                  timeout:1500
+                }).show();
+            <%}%>
+      
+            <%if(flash.error && flash.error.length>0){%>
+                new Noty({
+                  type:"error",
+                  theme: 'metroui',
+                  text:'<%=flash.error%>',
+                  layout:'topRight',
+                  timeout:1500
+                }).show();
+            <%}%>
+          </script>
+</body>

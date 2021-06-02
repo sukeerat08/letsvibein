@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="/css/search.css">
+<%-include("_header.ejs")-%>
+
+<body>
+    <div id="lower-div">
+        <div id="upper-div">
+
+            <h1>FriendList</h1>
+            <% if(profile_user.friends.length == 0) {%>
+                <div>No friends yet!</div>
+            <% }else{%>
+                   
+                <div id="results">
+                    <% for(friends of profile_user.friends){ %> 
+                    
+                        <%if(friends.from_user.id == profile_user.id) {%>
+                            <a href="/user/profile/<%=friends.to_user.id%>">
+                                <img src="<%=friends.to_user.avatar%>">
+                                <p><%= friends.to_user.name %></p>
+                            </a>
+                        <%}%>
+                       
+    
+                        <% if(friends.to_user.id == profile_user.id) {%>
+                            <a href="/user/profile/<%=friends.from_user.id%>">
+                                <img src="<%=friends.from_user.avatar%>">
+                                <p><%= friends.from_user.name %></p>
+                            </a>
+                        <%}%>
+                        
+                    <% } %>
+            
+                </div>
+                
+            <%}%>
+            
+        </div>
+    </div>
+</body>
+
+   

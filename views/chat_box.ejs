@@ -1,0 +1,47 @@
+<%-include("_header.ejs")-%>
+<link rel="stylesheet" href="/css/chat_box.css">
+
+<body>
+	<div id="lower-div">
+
+		<div id="upper-div">
+			<h1>Messages</h1>
+
+			<% if (locals.user){ %>
+				<div id="user-chat-box">
+					
+					<h1 id="name" style="font-size: 14px; text-align: left;"><%=name%></h1>	
+					
+					<ul id="chat-messages-list">
+						
+						<li class="other-message">
+							<!-- Other Message that are left aligned-->
+						</li>
+			
+						<li class="self-message">
+								<!-- Self Message that are right aligned-->
+						</li>
+			
+					</ul>
+					
+					<div id="chat-message-input-container">
+						<input id="chat-message-input" placeholder="Type here">
+						<button id="send-message" class="btn waves-effect waves-light" style="margin-left:4px;">Send<i class="material-icons right">send</i></button>
+					</div>
+			
+				</div>
+			<% } %>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+			
+	<script src="/js/chat_engine.js"></script>
+			
+	<% if(locals.user){ %>
+		<script>
+			new ChatEngine('user-chat-box','<%=locals.user.email %>','<%=chatroom%>')
+		</script>
+	<%}%>
+
+</body>

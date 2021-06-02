@@ -1,0 +1,41 @@
+<%-include('_header')-%>
+
+<link rel="stylesheet" href="/css/updateProfile.css">
+
+<body>
+    <div id="lower-div">
+        <div id=upper-div>
+           <h3>Update</h3>
+
+           <div id="update-form">
+                
+                <div id="image-container">
+                    <%if(profile_user.avatar==undefined){%>
+                        <img src="/images/default-profile.png" alt="<%=profile_user.name%>" id="preveiw">
+                    <%}else{%>
+                        <img src="<%=profile_user.avatar%>" alt="<%=profile_user.name%>" id="preveiw">
+                    <%}%> 
+                </div>
+            
+                <form action="/user/update/<%=profile_user.id%>" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="avatar" id="profile-input">
+
+                    <%if(profile_user.about==undefined){%>
+                        <input type="text" name="about" value="" placeholder="About Me" id="input-sty" autocomplete="off" required>
+                    <%}else{%>
+                        <input type="text" name="about" value="<%=profile_user.about%>" placeholder="About Me" id="input-sty" autocomplete="off" required>
+                    <%}%>
+
+                    <input type="text" name="name" value="<%=profile_user.name%>" placeholder="Name" id="input-sty" required>
+                    <input type="email" name="email" value="<%=profile_user.email%>" placeholder="Email" id="input-sty" required>
+                  
+                    <button type="submit">Update</button>
+                </form>
+           </div>
+
+        </div>
+    </div>
+    
+</body>
+
+<script src="/js/user_profile.js"></script>

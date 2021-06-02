@@ -1,0 +1,103 @@
+<%-include('_header.ejs')-%>
+
+    <body>
+
+      <div id="lower-div">
+          <div id=upper-div>
+              <h1 id="home-title">Home</h1>
+
+              <div class="modal" id="modal1">
+                <div class="modal-content">
+                  <%=typeof msg != 'undefined' ? msg: " " %>
+                  <form action="/posts/create" id="Create-user-form" method="POST" enctype="multipart/form-data" onsubmit="return createPost(event)">
+                    
+                      <div class="row">
+                        <div class="input-field">
+                          <i class="material-icons prefix">mode_edit</i>
+                          <textarea name="content" id="icon_prefix2" class="materialize-textarea textc" required></textarea>
+                          <label for="icon_prefix2">What's on your mind!?</label>
+                        </div>
+                      </div>
+    
+                      <div class=row style="margin-top:-20px;">
+                        <div class="file-field input-field">
+                          <div class="btn">
+                            <span> <i class="small material-icons">camera_alt</i></span>
+                            <input name="myPost" type="file" id="post-input" required>
+                          </div>
+                          <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <button class="btn waves-effect waves-light modal-close btn" type="submit" style="margin-top: -20px;">Post
+                        <i class="material-icons right">send</i>
+                      </button>
+                      <a href="#!" class="modal-close btn" style="margin-left:70%; margin-top:-35px;">Close</a>
+                    </form>
+                    
+                    <div style="display: flex; justify-content: center; margin-top:-10px ;">
+                      <div>
+                        <img style="display: none; width: 300px; height: 300px;"  id="preveiw-image">
+                      </div>
+                    </div>
+    
+                    <div style="display:flex; justify-content: center;"> 
+                      <div>
+                        <video style="display: none; width: 300px; height: 300px;" id="preview-video" controls ></video>
+                      </div>
+                    </div>
+    
+                </div>
+              </div>
+
+             
+              
+
+              <!--show posts of only friends of user signed in -->
+               <div class="post-container" >
+                  <ul>
+                  
+                    <%for(post of posts){%>
+
+                      <%for(friend of friendlist){%>
+
+                        <%if(post.user.email==friend){%>
+                          <%-include('_post')-%>
+                        <%}%>
+
+                      <%}%>
+                  
+                    <%}%>
+                  
+                  </ul>
+               </div>
+              
+          </div>
+      </div>
+
+
+    <script>
+      $(document).ready(function(){
+            $('.modal').modal();
+      });
+    </script>
+
+    <script src="/js/home_post_comment.js"></script>
+    <script src="/js/home_post.js"></script>
+    <script src="/js/post_preview.js"></script>
+    
+    
+    <!--  import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+    <script src="/js/toggle_likes.js"></script>
+    <script>
+      //adding toggleLike class to every toggle button present
+        $('.toggle-like-button').each(function(){
+            let self = this;
+            let toggleLike = new ToggleLike(self);
+        });
+    </script>
+
+  </body>
+

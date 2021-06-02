@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="/css/search.css">
+<%-include("_header.ejs")-%>
+
+<body>
+    <div id="lower-div">
+        <div id="upper-div">
+            <h1>User's Inbox</h1>
+
+            <%var found=false%>
+
+            <% if(user.friends.length == 0) {%>
+                <div>No messages in any inbox yet!!</div>
+            <% }else{%>
+                   
+                <div id="results">
+                    <%for(chatbox of user.chatroom){%>
+                        <%if(chatbox.messages.length!==0){%>
+                            <% for(friends of user.friends){ %>
+                                <%chatname=friends.from_user.id+friends.to_user.id%>
+                                    <%if(chatbox.name==chatname){%>
+                                        <%found=true%>
+                                        <%if(friends.from_user.id==user.id){%>
+                                            <a href="/friend/chatbox/?name=<%=friends.to_user.id%>/<%=chatname%>">
+                                                <img src="<%=friends.to_user.avatar%>">
+                                                <p><%=friends.to_user.name%></p>
+                                            </a>
+                                        <%}%>
+                                        <% if(friends.to_user.id ==user.id){%>
+                                            <a href="/friend/chatbox/?name=<%=friends.from_user.id%>/<%=chatname%>">
+                                                <img src="<%=friends.from_user.avatar%>">
+                                                <p><%=friends.from_user.name%></p>
+                                            </a>
+                                        <%}%>
+                                    <%}%>
+                            <% } %> 
+                        <%}%>
+                    <%}%>
+                    <%if(found==false){%>
+                        <div>No messages in any inbox yet!!</div>
+                    <%}%>
+                </div>
+                
+            <%}%>
+                   
+            
+        </div>
+    </div>
+    
+</body>

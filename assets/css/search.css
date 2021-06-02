@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+body {
+  background-image: linear-gradient(120deg, #bdf7f7, #caf1f1);
+  margin: 0;
+  height: min-content; }
+  body #lower-div {
+    margin-top: 1%;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-left: 25%;
+    width: 68%;
+    min-height: 95vh;
+    border-radius: 15px; }
+    body #lower-div #upper-div {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 4%;
+      margin-top: 4%;
+      background-color: rgba(255, 255, 255, 0.6);
+      width: 99%;
+      min-height: 90vh;
+      border-radius: 15px; }
+      body #lower-div #upper-div h1 {
+        font-family: "Lobster";
+        color: #108888;
+        text-align: center;
+        font-size: 2rem; }
+      body #lower-div #upper-div #results {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70%; }
+        body #lower-div #upper-div #results a {
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          border: 2px solid teal;
+          width: 100%;
+          margin-bottom: 20px;
+          border-radius: 10px;
+          height: 70px; }
+          body #lower-div #upper-div #results a img {
+            width: 60px;
+            height: 60px;
+            border-radius: 80%; }
+          body #lower-div #upper-div #results a p {
+            color: teal;
+            font-family: "Lobster";
+            margin-left: 10px; }

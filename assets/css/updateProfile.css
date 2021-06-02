@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+body {
+  background-image: linear-gradient(120deg, #bdf7f7, #caf1f1);
+  margin: 0;
+  height: min-content; }
+  body #lower-div {
+    margin-top: 1%;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-left: 25%;
+    width: 68%;
+    min-height: 90vh;
+    border-radius: 15px; }
+    body #lower-div #upper-div {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 4%;
+      margin-top: 4%;
+      background-color: rgba(255, 255, 255, 0.6);
+      width: 99%;
+      height: min-content;
+      border-radius: 15px; }
+      body #lower-div #upper-div h3 {
+        font-family: "Lobster";
+        color: #108888;
+        text-align: center;
+        margin-bottom: 4px; }
+      body #lower-div #upper-div #update-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 300px;
+        min-height: 75vh;
+        background-color: honeydew;
+        border-radius: 10px;
+        background-color: rgba(42, 243, 243, 0.3); }
+        body #lower-div #upper-div #update-form #image-container {
+          width: 140px;
+          height: 140px;
+          border: 2px solid teal;
+          border-radius: 50%;
+          margin-top: 5%; }
+          body #lower-div #upper-div #update-form #image-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; }
+        body #lower-div #upper-div #update-form form {
+          display: flex;
+          flex-direction: column;
+          align-items: center; }
+          body #lower-div #upper-div #update-form form #profile-input {
+            text-align: center;
+            margin-left: 24%;
+            margin-top: 4%;
+            border: none;
+            outline: none; }
+          body #lower-div #upper-div #update-form form #input-sty {
+            margin-top: 8%;
+            display: block;
+            width: 85%;
+            background: transparent;
+            color: teal;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid teal;
+            text-align: center;
+            font-size: 1.1rem; }
+          body #lower-div #upper-div #update-form form button {
+            margin-top: 8%;
+            width: 45%;
+            height: 30px;
+            outline: none;
+            border: none;
+            background-color: teal;
+            color: white;
+            cursor: pointer;
+            font-size: 15px; }
+          body #lower-div #upper-div #update-form form button:active {
+            transform: scale(0.9); }

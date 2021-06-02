@@ -1,0 +1,44 @@
+<li id="comment-<%=comment._id%>">
+   
+    <div style="display: flex;">
+        <div id="user-details">
+            <img src="<%=comment.user.avatar%>" width="50px" height="50px" style="border-radius: 50%;">
+            <div>
+                <p style="font-weight: 650;"><%=comment.user.name%></p>
+                <p style="margin-top:-10px;">
+
+                <%
+                  getdate=function(date)
+                  {
+                    var  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    finaldate=(date).toISOString().substring(0, 10).split("-").reverse().join("-");
+                    var month=months[date.getMonth()];
+                    date=finaldate.substring(0,2)+" "+month+" "+finaldate.substring(6);
+                    return date;
+                  }
+                %>
+                    <%=getdate(comment.createdAt)%>
+                </p>
+            </div>
+        </div>
+
+        <div class="comment-icons">
+            <% if (locals.user){ %>
+                <a class="toggle-like-button" data-likes="<%= comment.likes.length %>" data-type="Comment" href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
+                    <i class="small material-icons">favorite_border</i>
+                    <%= comment.likes.length %>
+                </a>
+                <% }else{ %>
+                    <i class="small material-icons">favorite_border</i>
+                    <%= comment.likes.length %> Likes
+            <% } %>
+    
+            <%if(locals.user &&(locals.user.id==post.user.id || locals.user.id==comment.user.id)){%>
+                <a href="/comments/destroy/<%=comment._id%>" class="delete-comment-button" style="margin-top: -5px;"><i class="small material-icons">backspace</i></a>
+            <%}%>
+        </div>
+        
+    </div>   
+    <p style="font-weight: 600;"><%=comment.content%></p>
+        
+</li>

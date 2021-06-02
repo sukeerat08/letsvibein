@@ -1,0 +1,101 @@
+<li id="post-<%=post.id%>">
+
+    <div id="user-info">
+
+      <div id="user-details">
+          <img src="<%=post.user.avatar%>" width="60px" height="60px" style="border-radius: 50%;">
+          <div>
+              <p style="font-weight: 650;"><%=post.user.name%></p>
+              <p style="margin-top:-8px;font-weight: 500;">
+                <%
+                  getdate=function(date)
+                  {
+                    var  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    finaldate=(date).toISOString().substring(0, 10).split("-").reverse().join("-");
+                    var month=months[date.getMonth()];
+                    date=finaldate.substring(0,2)+" "+month+" "+finaldate.substring(6);
+                    return date;
+                  }
+                %>
+                  
+                <%=getdate(post.createdAt)%>
+              </p>
+          </div>
+          <%if(post.shared=="Shared"){%>
+            <i class="material-icons" style="margin-top: 20px; margin-left: 15px;">autorenew</i>
+          <%}%>
+      </div>
+
+      <%if(locals.user && locals.user.id==post.user.id){%>
+        <div class="post-del">
+            <a href="/posts/destroy/<%=post.id%>" class="delete-post-button"><i class="small material-icons">delete_sweep</i></a>
+        </div>
+      <%}%>
+
+    </div>
+
+      <div class="post-caption">
+
+        <%if(post.typepv=='Image'){%>
+          <img src="<%=post.postPath %>" width="300px" height="300px">
+        <%}%>
+    
+        <%if(post.typepv=='Video'){%>
+          <video src="<%=post.postPath %>" controls width="300px" height="300px"></video>
+        <%}%>
+        <p style="font-weight: 580; width:43%;margin-top: -0.1px;"><%=post.content%></p>
+
+      </div>
+
+      <div class="post-icons">
+
+        <!--Likes button-->
+        <!-- display the likes of this post, if the user is logged in, then show the link to toggle likes, else, just show the count -->
+        <!-- study about the data attribute -->
+        <% if (locals.user){ %>
+          <a class="toggle-like-button" data-likes="<%= post.likes.length %>" data-type="Post" href="/likes/toggle/?id=<%=post._id%>&type=Post">
+            <i class="small material-icons">thumb_up</i>
+                  <p><%= post.likes.length %></p>
+          </a>
+      <% }else{ %>
+        <i class="small material-icons">thumb_up</i>
+        <p id="like-count"><%= post.likes.length %></p>
+      <% } %>
+        
+        <a href="/posts/share/<%=post.id%>" style="text-align: center;" class="share-post-button">
+          <i class="small material-icons">share</i>
+          <p style="text-align:center;">Share it</p>
+        </a>
+
+      </div>
+
+      <div class="footer">
+        <div>
+            <img src="<%=post.user.avatar%>" width="60px" height="60px" style="border-radius: 50%;">
+            <p style="font-weight: 640; margin-left:5px;margin-top:5px;"><%=post.user.name%></p>
+        </div>
+       
+        <%if(locals.user){%>
+          <!-- let's give an id to the new comment form, we'll also need to make the same changes in home_posts.js where we're adding a post to the page -->
+          <form action="/comments/create" method="POST" id="post-<%= post._id %>-comments-form">
+            <input type="text" name="content" placeholder="Write your comment" id="comment-box" required autocomplete="off">
+            <input type="hidden" name="post" value="<%=post._id%>">
+            <button class="btn waves-effect waves-light" type="submit">Add Comment</button>
+          </form>
+        <%}%>   
+
+      </div>
+     
+      <div class="comments-container">
+        <ul id="post-comment-<%=post._id%>">
+
+          <%for (comment of post.comments){%>
+              
+              <%-include('_comments')-%>
+          
+          <%}%>
+
+        </ul>
+      </div>
+
+  </li>

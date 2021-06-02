@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="/css/notification.css">
+<%-include("_header.ejs")-%>
+
+<body>
+
+    <div id="lower-div">
+        <div id="upper-div">
+
+            <h1>Friend Requests</h1>
+
+            <% if(user.friend_request.length == 0) {%>
+            <div>No more requests left !!!!</div>
+            <% }else{%>
+
+                <div id="results">
+
+                    <%for(u of user.friend_request){%>
+                        <div id="main-item">
+
+                            <div id="pic-name">
+                                <img src="<%=u.from_user.avatar%>" width="60"> 
+                                <p><%=u.from_user.name%></p>
+                            </div>
+
+                            <div id="buttons">   
+                                <button><a  href="/friend/add-friend/?id=<%=u.from_user.id %>/<%=u._id%>">Add Friend</a></button>
+                                <button><a  href="/friend/delete-friend-request/?id=<%=u.from_user.id %>/<%=u._id%>">Delete</button>
+                            </div>
+
+                        </div>       
+                    <%}%>
+    
+                </div>
+               
+            <%}%>
+
+        </div>
+    </div>
+    
+</body>
+  

@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+::-webkit-scrollbar {
+  width: 12px; }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(23, 158, 199, 0.3);
+  border-radius: 10px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px teal; }
+
+.hamburger {
+  display: none; }
+
+#menu-bar, .barside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  margin-left: 2%;
+  margin-top: 5%;
+  border-radius: 15px;
+  background-color: white;
+  font-family: "Lobster";
+  width: 20%; }
+  #menu-bar .logo-name, .barside .logo-name {
+    display: flex; }
+    #menu-bar .logo-name img, .barside .logo-name img {
+      margin-top: 28px;
+      margin-left: -12px;
+      width: 70px;
+      height: 70px;
+      border-radius: 100%; }
+    #menu-bar .logo-name h1, .barside .logo-name h1 {
+      margin-top: 38px;
+      margin-left: -15px;
+      font-size: 3rem;
+      background: -webkit-linear-gradient(45deg, teal, #c6dee6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; }
+  #menu-bar .options, .barside .options {
+    display: flex;
+    margin-bottom: 15px; }
+    #menu-bar .options i, .barside .options i {
+      font-size: 1.8rem;
+      color: #108888;
+      margin-top: 4px;
+      margin-right: 6px; }
+    #menu-bar .options a, .barside .options a {
+      text-decoration: none;
+      font-size: 2rem;
+      color: #108888; }
+    #menu-bar .options form, .barside .options form {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: relative; }
+      #menu-bar .options form .search-input, .barside .options form .search-input {
+        width: 75%;
+        border: 2px solid teal;
+        height: 40px;
+        color: teal;
+        border-radius: 50px; }
+      #menu-bar .options form .search-input::placeholder, .barside .options form .search-input::placeholder {
+        color: teal;
+        font-family: "Lobster";
+        margin-left: 50px;
+        text-align: center; }
+      #menu-bar .options form .search-button, .barside .options form .search-button {
+        right: 20px;
+        bottom: 15px;
+        position: absolute;
+        background-color: transparent;
+        border: none;
+        cursor: pointer; }
+
+@media only screen and (max-width: 950px) {
+  #menu-bar {
+    width: 22%; }
+    #menu-bar .options a {
+      font-size: 1.6rem; }
+    #menu-bar .options i {
+      font-size: 1.4rem; } }
+
+@media only screen and (max-width: 730px) {
+  .hamburger {
+    display: block;
+    margin-left: 3%;
+    color: teal; }
+  .sidenav {
+    width: 250px !important;
+    top: 1% !important;
+    left: 1% !important;
+    height: min-content !important;
+    overflow: hidden; }
+  #menu-bar {
+    display: none; } }

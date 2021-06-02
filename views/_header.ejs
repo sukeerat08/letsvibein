@@ -1,0 +1,145 @@
+<head>
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/header.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+   <!-- JQuery UI -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <script src="https://kit.fontawesome.com/3067a3f271.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+      <div id="menu-bar">
+        <div  class="logo-name">
+          <img src="/images/logo.png" alt="">
+          <h1>ibe</h1>
+        </div>
+
+        <div class="options">
+          <a href="/home"><i class="fas fa-home"></i>Home</a>
+        </div>
+
+        <div class="options">
+          <a href="/user/profile/<%=locals.user.id%>"><i class="fas fa-user-alt"></i>Profile</a>
+        </div>
+
+        <div class="options">
+          <a href="#modal1" class="modal-trigger"> <i class="fas fa-plus-square"></i>Post</a>
+        </div>
+
+        <div class="options">
+          <a href="/user/inbox/<%=locals.user.id%>"> <i class="fas fa-envelope"></i>Messages</a>
+        </div>
+        
+        <div class="options">
+          <a href="/friend/display-request"><i class="fas fa-bell"></i>Notifications</a>
+        </div>
+        
+        <div class="options">
+          <a href="/user/Sign-out"><i class="fas fa-sign-out-alt"></i>Logout</a>
+        </div>
+
+        <div class="options">
+          <form action="/user/search" method="POST">
+              <input type="text" name="friendname" placeholder="Search" class="search-input" autocomplete="off" required>
+              <button type="submit" class="search-button"><i class="fas fa-search-plus"></i></button>
+          </form>
+        </div>
+    </div>
+
+    <ul id="slide-out" class="sidenav barside">
+
+        <li>
+          <div  class="logo-name">
+            <img src="/images/logo.png" alt="">
+            <h1>ibe</h1>
+          </div>
+        </li>
+
+        <li>
+          <div class="options">
+            <a href="/home"><i class="fas fa-home"></i>Home</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="options">
+            <a href="/user/profile/<%=locals.user.id%>"><i class="fas fa-user-alt"></i>Profile</a>
+          </div>
+        </li>
+        
+        <li>
+          <div class="options">
+            <a href="#modal1" class="modal-trigger sidenav-close"> <i class="fas fa-plus-square"></i>Post</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="options">
+            <a href="/user/inbox/<%=locals.user.id%>"> <i class="fas fa-envelope"></i>Messages</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="options">
+            <a href="/friend/display-request"><i class="fas fa-bell"></i>Notifications</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="options">
+            <a href="/user/Sign-out"><i class="fas fa-sign-out-alt"></i>Logout</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="options">
+            <form action="/user/search" method="POST">
+                <input type="text" name="friendname" placeholder="Search" class="search-input" autocomplete="off" required>
+                <button type="submit" class="search-button"><i class="fas fa-search-plus"></i></button>
+            </form>
+          </div>
+        </li>
+
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger hamburger" ><i class="medium material-icons">menu</i></a>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+       $(document).ready(function(){
+          $('.sidenav').sidenav();
+       });
+    </script>
+
+    <script>
+      <%if(flash.success && flash.success.length>0){%>
+          new Noty({
+            type:"warning",
+            theme:'mint',
+            text:'<%=flash.success%>',
+            layout:'topRight',
+            timeout:1500
+          }).show();
+      <%}%>
+
+      <%if(flash.error && flash.error.length>0){%>
+          new Noty({
+            type:"error",
+            theme: 'metroui',
+            text:'<%=flash.error%>',
+            layout:'topRight',
+            timeout:1500
+          }).show();
+      <%}%>
+    </script>
+   
+</body>
