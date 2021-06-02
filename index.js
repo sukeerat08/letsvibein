@@ -2,7 +2,6 @@ require('dotenv').config()
 const compression = require('compression');
 const express=require('express');
 const app=express();
-const port=8000;
 
 const cookieParser=require('cookie-parser');
 
@@ -23,7 +22,7 @@ chatServer.listen(process.env.PORT, function (error) {
   if (error) {
     console.log("Error in setting up Chat Server");
   } else {
-    console.log("Chat Server is listening on port 5000");
+    console.log("Chat Server is listening on port");
   }
 });
 
@@ -89,10 +88,10 @@ app.use(customWare.setFlash);
 app.use('/',require('./routes'));
 
 
-app.listen(process.env.PORT||port,function(err){
+app.listen(process.env.PORT||8000,function(err){
      if(err){
         console.log(`Error in running server:${err}`);
         return;
     }
-    console.log(`Server is running on port number ${port}`);
+    console.log(`Server is running on port`);
 });
