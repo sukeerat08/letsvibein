@@ -10,7 +10,7 @@ passport.use(new googleStratergy({
 
     clientID:process.env.google_client_id,
     clientSecret:process.env.google_client_secret,
-    callbackURL:process.env.google_call_back_url
+    callbackURL:"https://letsvibein.herokuapp.com/user/auth/google/callback"
 },
     function(accessToken,refreshToken,profile,done){
 

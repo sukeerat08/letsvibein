@@ -5,7 +5,7 @@ class ChatEngine{
         this.userEmail = userEmail;
         this.chatroom=chatroom;
 
-        this.socket = io.connect("http://localhost:5000");
+        this.socket = io.connect("https://letsvibein.herokuapp.com");
 
         if (this.userEmail){
             this.connectionHandler();
